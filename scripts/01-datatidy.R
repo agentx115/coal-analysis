@@ -23,7 +23,7 @@ beetle = beetle %>%
 #way 2
 newbeetles = beetle %>%
   group_by(SpeciesName, SeedYear, Month, Year, fullDate) %>% #includes year because I'll have 2018 data soon
-  summarize(count=n()) #makes new count column
+  summarize(count = n()) #makes new count column
 View(newbeetles)
 
 
