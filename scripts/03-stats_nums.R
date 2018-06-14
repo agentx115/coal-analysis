@@ -2,6 +2,7 @@ library(tidyverse)
 library(lubridate)
 library(vegan)
 library(plyr)
+library(ggvegan)
 
 beetledata = read_csv("data/newbeetle2.csv")
 
@@ -17,18 +18,30 @@ unique(data2015$SpeciesName)
 
 ####Calculating Species Richness####
 
-#Menhinick's richness
-#number of species divided by the square root of the number of individuals
+#read in Vegan formatted data
 
-numsp2013 = nrow(data2013)
-individuals2013 = filter(beetle, SeedYear == 2013)
-numind2013 = nrow(individuals2013)
+veganBeetles = read_csv("data/veganFormatBeetles.csv")
 
-#Menhinick's richness for 2013
-numsp2013 / (sqrt(numind2013))
+#Shannon-Weiner Index
+#Collections assumed truly random
+#H ranges from 0 to 5
+diversity(veganBeetles[-1], index="shannon")
+
+#Brillouin
+#for some reason this one has out of range? Need to read up more on brillouin!!
+ddply(veganBeetles,~Sites,function(x) {
+         data.frame(BRILLOUIN=brillouin(x[-1]))
+ })
+
+#Simpsons index
+diversity(veganBeetles[-1], index="simpson")
+
 
 ####VEGAN PACKAGE STUFF####
 #"One thing that stumbles most vegan beginners around me is that you must
 #organize your data in the way vegan expects it (i.e. one column per species and
 #one row per site) and eliminate all other columns. Once you do that, things
 #should go smoothly." 
+
+####CCA plot attempts####
+cca(veganBeetles)
