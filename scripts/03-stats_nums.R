@@ -4,7 +4,8 @@ library(vegan)
 library(plyr)
 library(ggvegan)
 
-beetledata = read_csv("data/newbeetle2.csv")
+beetledata = read_csv("data/newbeetle21.csv")
+
 
 data2013 = filter(beetledata, SeedYear == 2013)
 unique(data2013$SpeciesName)
@@ -20,7 +21,7 @@ unique(data2015$SpeciesName)
 
 #read in Vegan formatted data
 
-veganBeetles = read_csv("data/veganFormatBeetles.csv")
+veganBeetles = read_csv("data/veganbeetleEDIT.csv")
 
 #Shannon-Weiner Index
 #Collections assumed truly random
@@ -45,3 +46,5 @@ diversity(veganBeetles[-1], index="simpson")
 
 ####CCA plot attempts####
 cca(veganBeetles)
+
+diversity(veganBeetles)

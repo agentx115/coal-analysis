@@ -11,11 +11,26 @@ names(beetledata)
 glimpse(beetledata)
 
 ####All beetle bar plots####
-ggplot(beetledata, aes(x = SeedYear, y = count, fill = SpeciesName)) +
-  geom_bar(stat = "identity")
-#bar plot for non P. fulvi
+#change x for what you want to check 
 ggplot(noProtapion, aes(x = SeedYear, y = count, fill = SpeciesName)) +
-  geom_bar(stat = "identity")
+  geom_bar(stat = "identity") +
+  labs( y = "Species count",
+        fill = "Species name") +
+  theme_light()
+#bar plot for non P. fulvi
+ggplot(noProtapion, aes(x = Month, y = count, fill = SpeciesName)) +
+  geom_bar(stat = "identity") +
+  labs( y = "Species count",
+        fill = "Species name") +
+  facet_wrap(~SeedYear, ncol = 1) +
+  theme_light()
+
+#ggplot(noProtapion, aes(x = Month, y = count, fill = SpeciesName)) +
+#geom_bar(stat = "identity") +
+#  labs( y = "Species count",
+#        fill = "Species name") +
+#  facet_wrap(~SeedYear, ncol = 1) +
+#  theme_light()
 
 
 #this one doesn't look so great
@@ -59,3 +74,8 @@ ggplot(noProtapion,
   geom_point() +
   stat_smooth() +
   facet_wrap(~SpeciesName)
+
+####Bar plot rarity####
+
+####Species by month####
+#select by month, then plot them next to each other
